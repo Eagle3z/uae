@@ -1,69 +1,208 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثقافة الإمارات | UAE Culture</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>HQ // Staff Management Dashboard</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo-container">
-            <img src="avatar.jpg" alt="Logo" class="nav-logo">
-            <span class="logo-text">UAE HERITAGE</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#values">القيم</a></li>
-            <li><a href="#traditions">التقاليد</a></li>
-        </ul>
-    </nav>
-
-    <header id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="main-title">أرض <span>الأصالة</span></h1>
-            <p class="subtitle">ثقافة بنيت على قيم الكرم، الشجاعة، والتطلع نحو المستقبل</p>
-        </div>
-    </header>
-
-    <section id="values" class="info-section">
-        <h2 class="title-glow">القيم الجوهرية</h2>
-        <div class="container">
-            <div class="card">
-                <h3>الكرم (الضيافة)</h3>
-                <p>تعتبر القهوة العربية والتمور رمزاً أصيلاً للترحيب بالضيف في كل مجلس إماراتي.</p>
+    <div class="login-wrapper" id="loginWrapper">
+        <div class="glass-card login-card">
+            <div class="accent-line"></div>
+            <div class="card-header">
+                <i class="fa-solid fa-shield-halved security-icon"></i>
+                <h2>STAFF GATEWAY</h2>
+                <p>AUTHORIZED PERSONNEL ONLY</p>
             </div>
-            <div class="card">
-                <h3>السنع</h3>
-                <p>مجموعة الآداب والعادات التي تنظم التعامل بين الأفراد وتعزز الاحترام المتبادل.</p>
-            </div>
-            <div class="card">
-                <h3>الاعتزاز بالهوية</h3>
-                <p>الارتباط الوثيق بالزي الوطني (الكندورة والعباءة) كرمز للفخر والانتماء.</p>
-            </div>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label for="username"><i class="fa-solid fa-user"></i> USERNAME</label>
+                    <input type="text" id="username" autocomplete="off" required placeholder="Enter tactical codename...">
+                </div>
+                
+                <div class="input-group">
+                    <label for="password"><i class="fa-solid fa-lock"></i> ACCESS KEY</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                
+                <div class="error-msg" id="loginError">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Invalid clearance credentials.
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    INITIALIZE LOGIN <i class="fa-solid fa-terminal"></i>
+                </button>
+            </form>
         </div>
-    </section>
+    </div>
 
-    <section id="traditions" class="traditions-grid">
-        <div class="trad-item">
-            <div class="trad-content">
-                <h3>الصيد بالصقور</h3>
-                <p>رياضة الآباء والأجداد التي تعكس الصبر والقدرة على التكيف مع الصحراء.</p>
+    <div class="dashboard-wrapper hidden" id="dashboardWrapper">
+        
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-circle-nodes neon-text"></i>
+                <span>CORE // HQ</span>
             </div>
-        </div>
-        <div class="trad-item">
-            <div class="trad-content">
-                <h3>الفنون الشعبية</h3>
-                <p>مثل "العيالة"، وهي رقصة تعبر عن القوة والوحدة والولاء للوطن.</p>
+            <nav class="sidebar-menu">
+                <a href="#" class="menu-item active"><i class="fa-solid fa-users-gear"></i> Staff Directory</a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-folder-tree"></i> Server Hierarchy</a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-shield-virus"></i> Security Logs</a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn btn-danger btn-block" onclick="handleLogout()">
+                    TERMINATE SESSION <i class="fa-solid fa-power-off"></i>
+                </button>
             </div>
-        </div>
-    </section>
+        </aside>
 
-    <footer>
-        <p>تم التصميم بواسطة AbdullaO + Bu7amad | فخورون بجذورنا</p>
-    </footer>
+        <main class="main-content">
+            <header class="content-header">
+                <div>
+                    <h1>STAFF ROSTER & RESPONSIBILITIES</h1>
+                    <p class="subtitle">Active deployment status and server role indexing</p>
+                </div>
+                <div class="user-badge">
+                    <span class="status-indicator online"></span>
+                    <span id="currentAdminName">Admin</span>
+                </div>
+            </header>
 
+            <section class="stats-grid">
+                <div class="glass-card stat-box">
+                    <div class="stat-icon pink-glow"><i class="fa-solid fa-crown"></i></div>
+                    <div>
+                        <h3>Founders</h3>
+                        <p class="stat-number">2</p>
+                    </div>
+                </div>
+                <div class="glass-card stat-box">
+                    <div class="stat-icon blue-glow"><i class="fa-solid fa-user-shield"></i></div>
+                    <div>
+                        <h3>Administrators</h3>
+                        <p class="stat-number">4</p>
+                    </div>
+                </div>
+                <div class="glass-card stat-box">
+                    <div class="stat-icon green-glow"><i class="fa-solid fa-gavel"></i></div>
+                    <div>
+                        <h3>Moderators</h3>
+                        <p class="stat-number">8</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="glass-card table-card">
+                <div class="table-actions">
+                    <h3><i class="fa-solid fa-list-check neon-text"></i> Personnel Registry</h3>
+                    <button class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> Add Staff</button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="staff-table">
+                        <thead>
+                            <tr>
+                                <th>Staff Member</th>
+                                <th>Primary Role</th>
+                                <th>Assigned Responsibilities</th>
+                                <th>Clearance Level</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="avatar"><i class="fa-solid fa-user-ninja"></i></div>
+                                        <div>
+                                            <div class="username">Apex</div>
+                                            <div class="discord-tag">Apex#0001</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-founder">Founder</span></td>
+                                <td>Full System Ownership, Infrastructure Management, API Integrations.</td>
+                                <td class="clearance level-5">LEVEL 5 (MAX)</td>
+                                <td><span class="status-pill active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
+                                        <div>
+                                            <div class="username">Viper</div>
+                                            <div class="discord-tag">Viper#1337</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-admin">Admin</span></td>
+                                <td>Bot Configuration, Staff Management, Raid Mitigation, Economy Balancing.</td>
+                                <td class="clearance level-4">LEVEL 4</td>
+                                <td><span class="status-pill active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="avatar"><i class="fa-solid fa-user-shield"></i></div>
+                                        <div>
+                                            <div class="username">Specter</div>
+                                            <div class="discord-tag">Spec#9081</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-mod">Senior Mod</span></td>
+                                <td>Ban Appeals, Ticket Resolution, Chat Escalations, Event Hosting.</td>
+                                <td class="clearance level-3">LEVEL 3</td>
+                                <td><span class="status-pill active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                                        <div>
+                                            <div class="username">Ghost</div>
+                                            <div class="discord-tag">Ghost#4421</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-trial">Trial Mod</span></td>
+                                <td>Chat Moderation, Filter Monitoring, Welcoming New Users.</td>
+                                <td class="clearance level-1">LEVEL 1</td>
+                                <td><span class="status-pill standby">Standby</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const error = document.getElementById('loginError');
+
+            // Quick basic check for mock presentation functionality
+            if (user.toLowerCase() === 'admin' && pass === 'password') {
+                error.style.display = 'none';
+                document.getElementById('currentAdminName').innerText = user.toUpperCase();
+                document.getElementById('loginWrapper').classList.add('hidden');
+                document.getElementById('dashboardWrapper').classList.remove('hidden');
+            } else {
+                error.style.display = 'block';
+            }
+        }
+
+        function handleLogout() {
+            document.getElementById('loginForm').reset();
+            document.getElementById('dashboardWrapper').classList.add('hidden');
+            document.getElementById('loginWrapper').classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
